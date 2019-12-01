@@ -144,6 +144,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         JmIVentasPorCategorias = new javax.swing.JMenuItem();
         JmIHistorial = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         JmiHerramientas = new javax.swing.JMenu();
         JmIControlInv = new javax.swing.JMenuItem();
         JmIControlVentas = new javax.swing.JMenuItem();
@@ -472,6 +473,19 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
             }
         });
         MenuInformes.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem4.setBackground(new java.awt.Color(36, 33, 33));
+        jMenuItem4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMenuItem4.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem4.setText("detallado de abonos entre fechas ");
+        jMenuItem4.setOpaque(true);
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        MenuInformes.add(jMenuItem4);
 
         menuBar.add(MenuInformes);
 
@@ -1033,6 +1047,26 @@ rptAbonos form = new rptAbonos();
         this.setExtendedState(MAXIMIZED_BOTH);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    historial_abonos form = new historial_abonos();
+
+        deskPricipal.add(form);
+
+        try {
+            form.setMaximum(false);
+            form.setClosable(true);
+            form.setIconifiable(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR ");
+        }
+        this.setLocationRelativeTo(null);
+        form.toFront();
+        form.setVisible(true);
+        this.setExtendedState(MAXIMIZED_BOTH); 
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1095,6 +1129,7 @@ rptAbonos form = new rptAbonos();
     javax.swing.JMenuItem jMenuItem1;
     javax.swing.JMenuItem jMenuItem2;
     javax.swing.JMenuItem jMenuItem3;
+    javax.swing.JMenuItem jMenuItem4;
     public static javax.swing.JMenu jmIVenta;
     javax.swing.JMenuItem jmIVentas;
     public static javax.swing.JLabel lblAcceso;
