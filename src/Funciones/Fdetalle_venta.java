@@ -207,6 +207,7 @@ public class Fdetalle_venta {
                 return 0;
             }
     }
+    
     public long selecAbono(){
         
         /*String  datos=FrmGen_Abono.cbxTipo.getSelectedItem().toString();
@@ -657,7 +658,52 @@ public class Fdetalle_venta {
         }
 
     }//cierre funcion
-
+    public boolean comprueba(){
+        sSQL = "select*from creditos"; 
+            try {
+                boolean creditos;
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sSQL);
+                while (rs.next()) {
+                    creditos = true;
+                }
+                return true;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+                return false;
+    }
+    }
+public boolean tabla(){
+    
+   sSQL = "CREATE TABLE `creditos` (" +
+"  `idcreditos` int(11) NOT NULL AUTO_INCREMENT," +
+"  `cod_ventaFK` int(11) NOT NULL,\n" +
+"  `cod_personaFK` bigint(20) DEFAULT NULL," +
+"  `valor_pagado` bigint(20) NOT NULL," +
+"  `fecha_pago` date NOT NULL," +
+"  PRIMARY KEY (`idcreditos`)," +
+"  KEY `cod_ventaFK_idx` (`cod_ventaFK`)," +
+"  CONSTRAINT `cod_ventaFK` FOREIGN KEY (`cod_ventaFK`) REFERENCES `venta` (`cod_venta`) ON DELETE NO ACTION ON UPDATE NO ACTION" +
+") ENGINE=InnoDB DEFAULT CHARSET=utf8";
+   
+            try {
+                PreparedStatement pst = cn.prepareStatement(sSQL);
+                
+                
+                
+                int N = pst.executeUpdate();
+                if (N != 0) {
+                    return true;
+                } else {
+                    //JOptionPane.showMessageDialog(null, "El codigo ingresado no esta en el sistema");
+                    return false;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+                return false;
+            } 
+}
+        
     public boolean insertarDetalle(Ddetalle_venta datos) {
         //JOptionPane.showMessageDialog(null, "estes el get comp" + datos.getcompr());
 

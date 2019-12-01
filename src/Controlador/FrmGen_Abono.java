@@ -109,6 +109,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
         }
     }
     public void selecCod_venta(){
+        
          Fdetalle_venta funcion = new Fdetalle_venta();
         long cod_venta = funcion.selec_venta();
 
@@ -362,11 +363,10 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
         txtTotal_venta = new javax.swing.JTextField();
         txtCliente = new javax.swing.JLabel();
         btnentrega = new javax.swing.JButton();
-        txtcodProducto = new javax.swing.JLabel();
-        txtcantidadven = new javax.swing.JLabel();
-        txtStock = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtNumCedula = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTabla = jTabla = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -377,6 +377,9 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
         lblCodUsuario = new javax.swing.JLabel();
         txtpago = new javax.swing.JLabel();
         txtcodVenta = new javax.swing.JLabel();
+        txtcantidadven = new javax.swing.JLabel();
+        txtStock = new javax.swing.JLabel();
+        txtcodProducto = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -545,12 +548,6 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
             }
         });
 
-        txtcodProducto.setText("jLabel1");
-
-        txtcantidadven.setText("jLabel1");
-
-        txtStock.setText("jLabel1");
-
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(207, 207, 207));
         jLabel10.setText("numerio de Cedula:");
@@ -566,21 +563,18 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abono", "Credito" }));
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(207, 207, 207));
+        jLabel11.setText("tipo pago ");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(221, 221, 221))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtStock)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtcantidadven)
-                        .addGap(36, 36, 36)
-                        .addComponent(txtcodProducto))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addContainerGap()
@@ -612,21 +606,32 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
                             .addGap(18, 18, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtSaldo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTotal_venta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGap(73, 73, 73)
-                            .addComponent(btnentrega)))
-                    .addComponent(txtNumCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtTotal_venta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(221, 221, 221))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNumCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 29, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(btnentrega)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtcodProducto)
-                    .addComponent(txtcantidadven)
-                    .addComponent(txtStock))
-                .addGap(5, 5, 5)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtNumCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -662,15 +667,16 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
                     .addComponent(txtAbono_add)
                     .addComponent(jLabel3))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCliente)
-                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnentrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(btnentrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCliente)
+                        .addContainerGap())))
         );
 
         jTabla.setBackground(new java.awt.Color(36, 33, 33));
@@ -708,7 +714,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -716,7 +722,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -732,6 +738,12 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
 
         txtcodVenta.setText("jLabel1");
 
+        txtcantidadven.setText("jLabel1");
+
+        txtStock.setText("jLabel1");
+
+        txtcodProducto.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -745,6 +757,14 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
                 .addGap(41, 41, 41)
                 .addComponent(txtpago)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtStock)
+                .addGap(18, 18, 18)
+                .addComponent(txtcantidadven)
+                .addGap(36, 36, 36)
+                .addComponent(txtcodProducto)
+                .addGap(105, 105, 105))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(409, Short.MAX_VALUE)
@@ -759,7 +779,12 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(lblCodUsuario)
                     .addComponent(txtpago))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcodProducto)
+                    .addComponent(txtcantidadven)
+                    .addComponent(txtStock))
+                .addGap(1, 1, 1)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -785,55 +810,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guardar_Abono();
         
-        /*
-        
-         if (txtMontoApertura.getText().length() == 0) {
-         JOptionPane.showMessageDialog(null, "Debes ingresar un Monto.");
-         txtMontoApertura.requestFocus();
-         return;
-         }
-
-         FcajaApertura funcion = new FcajaApertura();
-         Dapertura datos = new Dapertura();
-
-         datos.setCod_usuario_FK(Integer.parseInt(lblCodUsuario.getText()));
-
-         Calendar cal;
-         int d, m, a;
-         cal = dcFecha_apertura.getCalendar();
-         d = cal.get(Calendar.DAY_OF_MONTH);
-         m = cal.get(Calendar.MONTH);
-         a = cal.get(Calendar.YEAR) - 1900;
-         datos.setFecha_apertura(new java.sql.Date(a, m, d));
-
-         datos.setHora_apertura(Time.valueOf(txtHoraApertura.getText()));
-         datos.setMonto_apertura(Long.parseLong(txtMontoApertura.getText()));
-
-         try {
-         InetAddress addr = InetAddress.getLocalHost();
-         String hostname = addr.getHostName();
-         datos.setNombreCaja(hostname);
-
-         } catch (Exception e) {
-         // TODO: Add catch code
-         e.printStackTrace();
-         }
-
-         if (funcion.VerificarFecha() > 0) {
-            
-
-         JOptionPane.showMessageDialog(null, "La caja ya se abrio el dia de hoy."+funcion.VerificarFecha());
-
-         } else {
-
-         if (funcion.insertar(datos)) {
-         JOptionPane.showMessageDialog(null, "Caja Abierta, ya puede comenzar a vender.");
-         this.dispose();
-         } else {
-         JOptionPane.showMessageDialog(null, "No se registro la Apertura.");
-         }
-         }
-         */
+      
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNombreCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreCajeroActionPerformed
@@ -1049,7 +1026,9 @@ txtNumCedula.transferFocus();
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnentrega;
     private com.toedter.calendar.JDateChooser dcFecha_apertura;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

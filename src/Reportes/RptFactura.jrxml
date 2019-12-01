@@ -26,13 +26,21 @@ v.cod_venta , v.fecha_venta, v.iva, v.total_venta, v.pago , v.descuento,d.descue
  v.cod_venta = d.cod_ventaFK WHERE v.cod_venta = $P{cod_venta}
   AND v.tipo_comprobante ='Factura' GROUP by d.cod_productoFK ASC]]>
 	</queryString>
-	<field name="nombre_empresa" class="java.lang.String"/>
-	<field name="rut_empresa" class="java.lang.String"/>
+	<field name="nombre_empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rut_empresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="domicilio" class="java.lang.String"/>
 	<field name="actividad" class="java.lang.String"/>
-	<field name="cod_venta" class="java.lang.Integer"/>
-	<field name="fecha_venta" class="java.sql.Date"/>
-	<field name="iva" class="java.math.BigInteger">
+	<field name="cod_venta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_venta" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="iva" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="total_venta" class="java.lang.Long">
@@ -44,10 +52,10 @@ v.cod_venta , v.fecha_venta, v.iva, v.total_venta, v.pago , v.descuento,d.descue
 	<field name="descuento" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="descuento_detalle" class="java.math.BigInteger">
+	<field name="descuento_detalle" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="precio_venta" class="java.math.BigInteger">
+	<field name="precio_venta" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="NombreUsuario" class="java.lang.String"/>
@@ -58,8 +66,12 @@ v.cod_venta , v.fecha_venta, v.iva, v.total_venta, v.pago , v.descuento,d.descue
 	<field name="NombreProducto" class="java.lang.String"/>
 	<field name="totalCantidad" class="java.math.BigDecimal"/>
 	<field name="SubTotalProd" class="java.math.BigDecimal"/>
-	<field name="precio_producto" class="java.lang.Long"/>
-	<field name="metodo_pago" class="java.lang.String"/>
+	<field name="precio_producto" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metodo_pago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="nomCaja" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
