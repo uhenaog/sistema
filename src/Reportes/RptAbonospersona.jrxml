@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="849846aa-b5d8-414d-94c9-b6feacc40927">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<parameter name="rut_cliente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cod_ventaFK,valor_abonado,fecha_abono,historial_abonocol,total_venta, sum(total_venta-pago) as saldo_pendiente, nombre_persona from historial_abono
+inner join cliente on(cod_cliente=cod_clienteFK) inner join abono on(cod_venta=cod_ventaFK) inner join persona on(cod_cliente=cod_persona) where rut_cliente= $P{rut_cliente} group by idhistorial_abono 
+]]>
+	</queryString>
+	<field name="cod_ventaFK" class="java.lang.Integer"/>
+	<field name="valor_abonado" class="java.lang.Long"/>
+	<field name="fecha_abono" class="java.sql.Date"/>
+	<field name="historial_abonocol" class="java.lang.String"/>
+	<field name="total_venta" class="java.lang.Long"/>
+	<field name="saldo_pendiente" class="java.math.BigDecimal"/>
+	<field name="nombre_persona" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="233" y="33" width="100" height="20" uuid="3c28a0eb-46c1-40c8-9d22-11f32dc3234a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abonos por Cliente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="96" y="0" width="100" height="20" uuid="bc81dbad-baee-4d2b-b76c-eb4d2a88f4a3"/>
+				<textFieldExpression><![CDATA[$F{cod_ventaFK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="100" height="20" uuid="cb13d4ca-15ce-4090-9edb-9a890886f74c"/>
+				<textFieldExpression><![CDATA[$F{total_venta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="41" width="100" height="20" uuid="dc11bc48-78d9-425a-a6e1-71210c515a4b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha abonos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="41" width="77" height="20" uuid="0411c356-51f4-4cba-8a3e-904f49344a42"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[valor Abonos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f69c9d0d-7df4-4158-a67a-4fd320c394f6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[numero de Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="0" width="100" height="20" uuid="28b9227d-f6af-4f46-8d7b-d7b9d68f4229"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Venta ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="21" width="100" height="20" uuid="af8fae43-bf1d-4946-a15e-88ff7ffd1f2b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Cliente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="21" width="100" height="20" uuid="c0caa18e-e160-4671-8e97-1353bd06936c"/>
+				<textFieldExpression><![CDATA[$F{nombre_persona}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="73" height="20" uuid="329a4883-3282-43a9-8b87-eb66f8a75038"/>
+				<textFieldExpression><![CDATA[$F{fecha_abono}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="26" width="197" height="1" uuid="52fd067e-6b9c-4f50-b860-88e8aa26910b"/>
+			</line>
+			<line>
+				<reportElement x="196" y="0" width="1" height="26" uuid="301416fc-0071-45ac-a8f7-6db7571e0b6a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="26" uuid="ee43f6fd-f314-4cc2-ae45-1515f3cd4286"/>
+			</line>
+			<staticText>
+				<reportElement x="96" y="0" width="14" height="20" uuid="f65d9e4b-e83b-4696-b068-f13b667cc939"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="114" y="0" width="63" height="20" uuid="e3aec824-9970-4321-b3f5-ae1a081c1630"/>
+				<textFieldExpression><![CDATA[$F{valor_abonado}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="84" y="0" width="1" height="26" uuid="0681dcae-096a-49ad-892c-33d9d92a4f63"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="bd81953f-2fc3-4f6e-a573-6d6dc5653fc6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="0" width="80" height="20" uuid="1d1cc7c1-108e-4c06-9972-8b21a227da86"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="451" y="0" width="40" height="20" uuid="b51892ae-ec83-4550-894f-2cc7715164f0"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="132" height="20" uuid="9d7800ea-5ec6-4ba3-82c7-e98187d90152"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[saldo pendiente  a la fecha ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="15" width="100" height="20" uuid="c24a3681-87a8-4bf6-9e36-352e9e638f31"/>
+				<textFieldExpression><![CDATA[$F{saldo_pendiente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="16" width="14" height="20" uuid="19ae8ce3-c4fa-4305-8f1a-ec420e58622a"/>
+				<text><![CDATA[$]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

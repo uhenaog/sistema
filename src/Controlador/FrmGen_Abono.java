@@ -7,6 +7,7 @@ import Datos.Dventa;
 import Funciones.FcajaApertura;
 import Funciones.FcajaCierre;
 import Funciones.Fcliente;
+import Funciones.Fcredito;
 import Funciones.Fdetalle_venta;
 import Funciones.Fhistorial_abono;
 import Funciones.Fprod_abono;
@@ -338,6 +339,18 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
         }
 
     }
+    public void creditos(){
+        JOptionPane.showMessageDialog(null, "este es creditos en construccion ");
+        Fcredito funcion = new Fcredito();
+        long cod_venta = funcion.selec_venta();
+
+        if (cod_venta > 0) {
+            //JOptionPane.showMessageDialog(null,"este es cod Venta "+cod_venta);
+            txtcodVenta.setText(String.valueOf(cod_venta));
+            txtNumfactura.setText(String.valueOf(cod_venta));
+        }
+        
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -365,7 +378,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
         btnentrega = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtNumCedula = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbtipo = new javax.swing.JComboBox<String>();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTabla = jTabla = new javax.swing.JTable(){
@@ -563,7 +576,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abono", "Credito" }));
+        cmbtipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Abono", "Credito" }));
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(207, 207, 207));
@@ -616,9 +629,9 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNumCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNumCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                                    .addComponent(cmbtipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGap(0, 29, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
@@ -629,7 +642,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -845,7 +858,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
         if (fun.VerificarFecha() > 0) {
             if (fun2.VerificarFecha() > 0) {
                 JOptionPane.showMessageDialog(null, "primero debe abrir caja ");
-            } else {
+            } else{
                 seleccionProd();
                 
             }
@@ -904,7 +917,12 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
 
     private void txtNumCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumCedulaActionPerformed
 txtNumCedula.transferFocus();
-        selecCod_venta();        // TODO add your handling code here:
+if (cmbtipo.getSelectedItem().equals("Abono")){
+        selecCod_venta(); 
+}else if (cmbtipo.getSelectedItem().equals("Credito")){
+    creditos();
+}
+// TODO add your handling code here:
     }//GEN-LAST:event_txtNumCedulaActionPerformed
 
     private void jTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaMouseClicked
@@ -1025,8 +1043,8 @@ txtNumCedula.transferFocus();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnentrega;
+    private javax.swing.JComboBox<String> cmbtipo;
     private com.toedter.calendar.JDateChooser dcFecha_apertura;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

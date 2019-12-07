@@ -145,6 +145,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         JmIHistorial = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        Abonospersona = new javax.swing.JMenuItem();
         JmiHerramientas = new javax.swing.JMenu();
         JmIControlInv = new javax.swing.JMenuItem();
         JmIControlVentas = new javax.swing.JMenuItem();
@@ -474,7 +475,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         });
         MenuInformes.add(jMenuItem3);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_9, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem4.setBackground(new java.awt.Color(36, 33, 33));
         jMenuItem4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jMenuItem4.setForeground(new java.awt.Color(255, 255, 255));
@@ -486,6 +487,19 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
             }
         });
         MenuInformes.add(jMenuItem4);
+
+        Abonospersona.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_8, java.awt.event.InputEvent.SHIFT_MASK));
+        Abonospersona.setBackground(new java.awt.Color(36, 33, 33));
+        Abonospersona.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Abonospersona.setForeground(new java.awt.Color(255, 255, 255));
+        Abonospersona.setText("Abonos por  Cliente ");
+        Abonospersona.setOpaque(true);
+        Abonospersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbonospersonaActionPerformed(evt);
+            }
+        });
+        MenuInformes.add(Abonospersona);
 
         menuBar.add(MenuInformes);
 
@@ -1067,6 +1081,35 @@ rptAbonos form = new rptAbonos();
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void AbonospersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbonospersonaActionPerformed
+
+        java.util.Locale locale = new Locale("es", "CL");
+
+        int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese numero de documento del cliente "));
+        if (cantidad < 0) {
+
+            JOptionPane.showMessageDialog(null, "Debe ingresar un valor");
+            return;
+        }
+        try {
+
+            JasperReport jr = (JasperReport) JRLoader.loadObject(frmStockCritico.class.getResource("/Reportes/RptAbonospersona.jasper"));
+            Map parametro = new HashMap<String, Integer>();
+            parametro.put("rut_cliente", cantidad);
+            parametro.put(JRParameter.REPORT_LOCALE, locale);
+
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.show();
+
+            // JasperPrintManager.printReport( jp, true);
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(rootPane, "error" + e);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AbonospersonaActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1100,6 +1143,7 @@ rptAbonos form = new rptAbonos();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JMenuItem Abonospersona;
     public static javax.swing.JMenuItem JmIAbrirCaja;
     public static javax.swing.JMenuItem JmICerrarCaja;
     public static javax.swing.JMenuItem JmIClientes;
