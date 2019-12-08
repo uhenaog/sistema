@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6877b8d-d5a2-410d-9aec-ad7b725bba60">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="39"/>
+	<parameter name="fecha_termino" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select  monto_cierre, fecha_cierre, nombre_persona, a.hora_apertura, hora_cierre, sum(pago) as sumpago,  diferencia_cierre, efectivo, tarjeta, credito from cierre c
+ inner join persona on (cod_persona=c.cod_usuario_fk)inner join apertura a on (a.fecha_apertura=fecha_cierre) inner join abono on (fecha_venta=fecha_cierre)
+
+ where fecha_cierre BETWEEN $P{fecha_inicio} AND $P{fecha_termino} group by cod_cierre]]>
+	</queryString>
+	<field name="monto_cierre" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_cierre" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_persona" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora_apertura" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora_cierre" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sumpago" class="java.math.BigDecimal"/>
+	<field name="diferencia_cierre" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="efectivo" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tarjeta" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="credito" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="ventasEfectivo " class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{efectivo}]]></variableExpression>
+	</variable>
+	<variable name="VentasCredito" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{credito}]]></variableExpression>
+	</variable>
+	<variable name="Ventas Targeta" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{tarjeta}]]></variableExpression>
+	</variable>
+	<variable name="VentasAbono" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{sumpago}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="214" y="25" width="201" height="20" uuid="caf5fe43-9df5-4e84-a6ca-d805a9c5a01d"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETALLE DE CIERRES ENTRE FECHAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="9" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="40" uuid="305bcc85-5cbb-477a-8655-7750d2f14020"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="1" width="50" height="40" uuid="82d57b44-9a1d-4ee1-8c2e-18e70a3e2bb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[hora apertura ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="106" y="1" width="50" height="40" uuid="7e9a41aa-ea0d-4586-90a7-210f979abb0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Cierre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="0" width="50" height="40" uuid="af97c22d-26e1-437e-ba92-f06b154c4b81"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Persona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="0" width="50" height="40" uuid="debb8d81-c327-4967-a9d7-f34a544a0c87"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas en efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="50" height="40" uuid="0728d0f8-d182-4e2f-b54e-326f9120fbc6"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Targeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="1" width="50" height="40" uuid="435edb88-a8ab-4581-95a2-279ed6c7b27f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[credito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="1" width="50" height="40" uuid="df7f8590-f8b9-48c8-bea0-a0d2bfc1bbdf"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[abonos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="2" width="50" height="40" uuid="9817d96e-a3e1-4487-8fec-ccfd7fd1f660"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dinero total en caja ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="0" y="0" width="56" height="20" uuid="b4f64c60-b019-40d0-b2de-8a9a0bd918d1"/>
+				<textFieldExpression><![CDATA[$F{fecha_cierre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="56" y="0" width="50" height="20" uuid="81ef44ef-7fbf-48e9-b419-436ac9a196f7"/>
+				<textFieldExpression><![CDATA[$F{hora_apertura}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="106" y="0" width="50" height="20" uuid="9b971df5-9214-4043-9a2e-d694751fef4a"/>
+				<textFieldExpression><![CDATA[$F{hora_cierre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="0" width="70" height="20" uuid="0a84d52c-7647-4486-bcca-28e66b2aefd7"/>
+				<textFieldExpression><![CDATA[$F{nombre_persona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="0" width="50" height="20" uuid="965a7e46-4cab-44a4-a90f-7dd5e07dd94a"/>
+				<textFieldExpression><![CDATA[$F{efectivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="50" height="20" uuid="4c85be39-6d5e-4173-b4b8-91caabb9dd11"/>
+				<textFieldExpression><![CDATA[$F{tarjeta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="0" width="50" height="20" uuid="85d3ba20-09bf-4628-ab57-00f3a03d53b0"/>
+				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="0" width="50" height="20" uuid="d334ff8d-e67a-4ce9-bf35-920f70e39cf8"/>
+				<textFieldExpression><![CDATA[$F{sumpago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="0" width="50" height="20" uuid="62068b9b-6239-4a1a-9f13-f423761e82ad"/>
+				<textFieldExpression><![CDATA[$F{monto_cierre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="21" width="100" height="20" uuid="12555ad6-2b69-4d8f-b825-084dbb721376"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="21" width="80" height="20" uuid="d48ee72f-ae34-46fc-aefc-1fbe69455dda"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="21" width="40" height="20" uuid="36cd3e78-7a0d-4c3b-91f1-44bf41aa53f6"/>
+				<textFieldExpression><![CDATA[" de  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="135" splitType="Stretch">
+			<textField>
+				<reportElement x="214" y="57" width="65" height="20" uuid="675f0c5d-80ec-448b-82b9-82638994473f"/>
+				<textFieldExpression><![CDATA[$V{ventasEfectivo }]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="57" width="65" height="20" uuid="08d31e43-1ca3-454c-972a-e45d0d16ff65"/>
+				<textFieldExpression><![CDATA[$V{Ventas Targeta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="57" width="65" height="20" uuid="4ee6a78a-2e1b-443b-a3aa-53437da1cf68"/>
+				<textFieldExpression><![CDATA[$V{VentasCredito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="57" width="65" height="20" uuid="c637c120-ac5f-41ac-b9cc-e36dd64b251e"/>
+				<textFieldExpression><![CDATA[$V{VentasAbono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="110" y="57" width="100" height="20" uuid="88abfed7-a6ef-4cde-9827-c49ff27134ea"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[totales ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="19" width="62" height="38" uuid="13d91027-c629-43ae-929d-50a27cea0daa"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventas efectivo ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="19" width="62" height="38" uuid="e67c8ed9-05f9-45d2-87e7-380b00533e3d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventas a Credito ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="19" width="62" height="38" uuid="d23d7789-8bbc-4ddc-bd29-f91cedbc2a83"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventas con targeta ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="19" width="62" height="38" uuid="4763b722-7e36-47c6-95a3-8181893b1976"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[total recaudado de abonos ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -412,6 +412,55 @@ txtDescuento.setText("0");
     }
     
 }
+    public void factura(){
+        java.util.Locale locale = new Locale("es", "CL");
+
+            if (cboComprobante.getSelectedItem().equals("Factura")) {
+                try {
+                    int codigo = Integer.parseInt(txtCod_venta.getText());
+                    //long pago = Long.parseLong(txtImporte.getText());
+                    JasperReport jr = (JasperReport) JRLoader.loadObject(VistaBoleta.class.getResource("/Reportes/RptFactura.jasper"));//aqui
+
+                    Map parametro = new HashMap<String, Integer>();
+                    parametro.put(JRParameter.REPORT_LOCALE, locale);
+                    parametro.put("logo",this.getClass().getResourceAsStream("/ImagenesReport/logo1.png"));
+                    parametro.put("cod_venta", codigo);
+
+                    JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn);
+                    JasperViewer jv = new JasperViewer(jp, true);
+                    //jv.show();
+
+                    JasperPrintManager.printReport( jp, false);
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(rootPane, "error" + e);
+                }
+            } else if (cboComprobante.getSelectedItem().equals("Boleta")) {
+                try {
+                    int codigo = Integer.parseInt(txtCod_venta.getText());
+
+                    JasperReport jr = (JasperReport) JRLoader.loadObject(VistaBoleta.class.getResource("/Reportes/RptBoleta.jasper"));
+
+                    Map parametro = new HashMap<String, Integer>();
+                    
+                    parametro.put("logo",this.getClass().getResourceAsStream("/ImagenesReport/logo1.png"));
+
+                    parametro.put("cod_venta", codigo);
+                    parametro.put(JRParameter.REPORT_LOCALE, locale);
+
+                    JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn);
+                    JasperViewer jv = new JasperViewer(jp, true);
+                    //jv.show();
+
+                    JasperPrintManager.printReport( jp, true);
+                    btnNuevo.setEnabled(true);
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(rootPane, "error" + e);
+                }
+
+            }
+    }
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1582,8 +1631,7 @@ NfacturaAtxt();
     }//GEN-LAST:event_cboComprobanteActionPerformed
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-
-        if (txtImporte.getText().length() == 0) {
+ if (txtImporte.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Ingrese un Monto ");
             txtImporte.setText("");
             txtImporte.requestFocus();
@@ -1594,6 +1642,8 @@ NfacturaAtxt();
         long total = Long.valueOf(txtTotal_venta.getText());
         long iva ;
         iva =(Integer.parseInt(txtTotal_venta.getText())*19)/100;
+        
+        
 
         if (importe >= total) {
             long cambio = importe - total;
@@ -1601,6 +1651,7 @@ NfacturaAtxt();
             txtCambio.setText(String.valueOf(cambio));
 
             JOptionPane.showMessageDialog(rootPane, "sobrante para el Cliente  " + cambio);
+//*********
 
             Fventa funcion = new Fventa();
             Dventa datos = new Dventa();
@@ -1626,53 +1677,8 @@ NfacturaAtxt();
 
             funcion.Pago(datos);
 
-            java.util.Locale locale = new Locale("es", "CL");
 
-            if (cboComprobante.getSelectedItem().equals("Factura")) {
-                try {
-                    int codigo = Integer.parseInt(txtCod_venta.getText());
-                    //long pago = Long.parseLong(txtImporte.getText());
-                    JasperReport jr = (JasperReport) JRLoader.loadObject(VistaBoleta.class.getResource("/Reportes/RptFactura.jasper"));//aqui
-
-                    Map parametro = new HashMap<String, Integer>();
-                    parametro.put(JRParameter.REPORT_LOCALE, locale);
-                    parametro.put("logo",this.getClass().getResourceAsStream("/ImagenesReport/logo1.png"));
-                    parametro.put("cod_venta", codigo);
-
-                    JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn);
-                    JasperViewer jv = new JasperViewer(jp, true);
-                    //jv.show();
-
-                    JasperPrintManager.printReport( jp, false);
-                } catch (Exception e) {
-
-                    JOptionPane.showMessageDialog(rootPane, "error" + e);
-                }
-            } else if (cboComprobante.getSelectedItem().equals("Boleta")) {
-                try {
-                    int codigo = Integer.parseInt(txtCod_venta.getText());
-
-                    JasperReport jr = (JasperReport) JRLoader.loadObject(VistaBoleta.class.getResource("/Reportes/RptBoleta.jasper"));
-
-                    Map parametro = new HashMap<String, Integer>();
-                    
-                    parametro.put("logo",this.getClass().getResourceAsStream("/ImagenesReport/logo1.png"));
-
-                    parametro.put("cod_venta", codigo);
-                    parametro.put(JRParameter.REPORT_LOCALE, locale);
-
-                    JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn);
-                    JasperViewer jv = new JasperViewer(jp, true);
-                    //jv.show();
-
-                    JasperPrintManager.printReport( jp, true);
-                    btnNuevo.setEnabled(true);
-                } catch (Exception e) {
-
-                    JOptionPane.showMessageDialog(rootPane, "error" + e);
-                }
-
-            }
+            factura();
 
         } else {
 
@@ -1681,8 +1687,11 @@ NfacturaAtxt();
             txtImporte.requestFocus();
 
         }
+
         this.setClosable(true);
         nuevaVenta();
+        //***********
+           
 
     }//GEN-LAST:event_btnCalcularActionPerformed
 

@@ -146,6 +146,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         Abonospersona = new javax.swing.JMenuItem();
+        cierresPorFechas = new javax.swing.JMenuItem();
         JmiHerramientas = new javax.swing.JMenu();
         JmIControlInv = new javax.swing.JMenuItem();
         JmIControlVentas = new javax.swing.JMenuItem();
@@ -500,6 +501,19 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
             }
         });
         MenuInformes.add(Abonospersona);
+
+        cierresPorFechas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_0, java.awt.event.InputEvent.SHIFT_MASK));
+        cierresPorFechas.setBackground(new java.awt.Color(36, 33, 33));
+        cierresPorFechas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cierresPorFechas.setForeground(new java.awt.Color(255, 255, 255));
+        cierresPorFechas.setText("Informe de Cierres por Fechas ");
+        cierresPorFechas.setOpaque(true);
+        cierresPorFechas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cierresPorFechasActionPerformed(evt);
+            }
+        });
+        MenuInformes.add(cierresPorFechas);
 
         menuBar.add(MenuInformes);
 
@@ -1110,6 +1124,27 @@ rptAbonos form = new rptAbonos();
         // TODO add your handling code here:
     }//GEN-LAST:event_AbonospersonaActionPerformed
 
+    private void cierresPorFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cierresPorFechasActionPerformed
+rptinfcierre form = new rptinfcierre();
+        deskPricipal.add(form);
+
+        //   form.setMaximizable(true);
+        try {
+            form.setMaximum(false);
+            form.setClosable(true);
+            form.setIconifiable(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR ");
+        }
+
+        this.setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        form.toFront();
+        form.setVisible(true);
+        comprobar = 2;
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cierresPorFechasActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1165,6 +1200,7 @@ rptAbonos form = new rptAbonos();
     public static javax.swing.JMenu MenuInformes;
     public static javax.swing.JMenu MenuPersonal;
     public static javax.swing.JMenu MenuProductos;
+    javax.swing.JMenuItem cierresPorFechas;
     public static javax.swing.JDesktopPane deskPricipal;
     javax.swing.JMenu jMIAyuda;
     javax.swing.JMenu jMenu1;

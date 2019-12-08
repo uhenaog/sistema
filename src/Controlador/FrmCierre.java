@@ -729,7 +729,7 @@ public final class FrmCierre extends javax.swing.JInternalFrame {
         //   DecimalFormat formateador = new DecimalFormat("0.00");
         FcajaCierre funcion = new FcajaCierre();
 
-        if (funcion.VerificarFecha() > 1) {
+        if (funcion.VerificarFecha() > 0) {
 
             JOptionPane.showMessageDialog(null, "La caja ya se Cerro el dia de hoy.");
 

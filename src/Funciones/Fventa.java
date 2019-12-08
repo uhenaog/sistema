@@ -592,6 +592,28 @@ public class Fventa {
         }
 
     }
+    public boolean guardarPago(Dventa datos){
+        sSQL = "update venta set pago = ? where cod_venta = ?";
+        //JOptionPane.showMessageDialog(null,"estoy rm guaradr pago "+datos.getPago() +"cond venta "+datos.getCod_venta());
+        try {
+
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+
+            pst.setDouble(1, datos.getPago());         
+            pst.setLong(2, datos.getCod_venta());
+            
+            
+            int N = pst.executeUpdate();
+            if (N != 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return false;
+        } 
+    }
 
 }
 

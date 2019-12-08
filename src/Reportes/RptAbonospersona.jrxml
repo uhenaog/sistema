@@ -8,8 +8,7 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select cod_ventaFK,valor_abonado,fecha_abono,historial_abonocol,total_venta, sum(total_venta-pago) as saldo_pendiente, nombre_persona from historial_abono
-inner join cliente on(cod_cliente=cod_clienteFK) inner join abono on(cod_venta=cod_ventaFK) inner join persona on(cod_cliente=cod_persona) where rut_cliente= $P{rut_cliente} group by idhistorial_abono 
-]]>
+inner join cliente on(cod_cliente=cod_clienteFK) inner join abono on(cod_venta=cod_ventaFK) inner join persona on(cod_cliente=cod_persona) where rut_cliente= $P{rut_cliente} group by idhistorial_abono]]>
 	</queryString>
 	<field name="cod_ventaFK" class="java.lang.Integer"/>
 	<field name="valor_abonado" class="java.lang.Long"/>

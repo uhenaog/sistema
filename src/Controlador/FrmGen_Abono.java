@@ -2,6 +2,7 @@ package Controlador;
 
 import static Controlador.FRMPRINCIPAL.deskPricipal;
 import Datos.Dapertura;
+import Datos.Dcredito;
 import Datos.Dhistorial_abono;
 import Datos.Dventa;
 import Funciones.FcajaApertura;
@@ -178,7 +179,30 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(rootPane, "error" + e);
         }
     }
+public void facturaCre(){
+     java.util.Locale locale = new Locale("es", "CL");
 
+            
+                try {
+                    int codigo = Integer.parseInt(txtNumfactura.getText());
+                    //long pago = Long.parseLong(txtImporte.getText());
+                    JasperReport jr = (JasperReport) JRLoader.loadObject(VistaBoleta.class.getResource("/Reportes/RptFactura.jasper"));//aqui
+
+                    Map parametro = new HashMap<String, Integer>();
+                    parametro.put(JRParameter.REPORT_LOCALE, locale);
+                    parametro.put("logo",this.getClass().getResourceAsStream("/ImagenesReport/logo1.png"));
+                    parametro.put("cod_venta", codigo);
+
+                    JasperPrint jp = JasperFillManager.fillReport(jr, parametro, cn);
+                    JasperViewer jv = new JasperViewer(jp, true);
+                    //jv.show();
+
+                    JasperPrintManager.printReport( jp, false);
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(rootPane, "error" + e);
+                }
+}
     public void guardar_Abono() {
         historial_abono();
         if (txtSaldo.getText().equals(txtAbono_add.getText())){
@@ -340,7 +364,7 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
 
     }
     public void creditos(){
-        JOptionPane.showMessageDialog(null, "este es creditos en construccion ");
+       // JOptionPane.showMessageDialog(null, "este es creditos en construccion ");
         Fcredito funcion = new Fcredito();
         long cod_venta = funcion.selec_venta();
 
@@ -348,10 +372,64 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
             //JOptionPane.showMessageDialog(null,"este es cod Venta "+cod_venta);
             txtcodVenta.setText(String.valueOf(cod_venta));
             txtNumfactura.setText(String.valueOf(cod_venta));
+            
+               long total_venta = funcion.selecTotalVenta();
+            txtTotal_venta.setText(String.valueOf(total_venta));
+            
+            long pago = funcion.Pago();
+            long saldo = total_venta - pago;
+            txtSaldo.setText(String.valueOf(saldo));
+            txtpago.setText(String.valueOf(pago));
+            
+             long cod_clienteFK = funcion.Cliente();
+            txtCliente.setText(String.valueOf(cod_clienteFK));
+
+            String nombre_persona = funcion.Nombre_cliente();
+            txtNombre_cliente.setText(String.valueOf(nombre_persona));
+        }else {
+            JOptionPane.showMessageDialog(null, "El valor ingresado no saldos pendientes por favor verifique ");
         }
         
     }
+    public void guardar_credito(){
+        JOptionPane.showMessageDialog(null, "este es creditos en construccion ");
+         Fcredito funcion = new Fcredito();
+        Dcredito datos = new Dcredito();
+        Fventa fun =new Fventa();
+        Dventa dat =new Dventa();
 
+        int total = Integer.parseInt(txtAbono_add.getText().toString());
+        int pago_anterior = Integer.parseInt(txtpago.getText().toString());
+        int codigo = Integer.parseInt(txtNumfactura.getText().toString());
+        int abono = pago_anterior + total;
+        //datos para actualizar pago en venta 
+        dat.setPago(abono);
+        dat.setCod_venta(codigo);
+        fun.guardarPago(dat);
+
+//datos para guardar el abono en la base de datos;
+        Calendar cal;
+        int d, m, a;
+        cal = dcFecha_apertura.getCalendar();
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        m = cal.get(Calendar.MONTH);
+        a = cal.get(Calendar.YEAR) - 1900;
+        datos.setFecha_pago(new java.sql.Date(a, m, d));
+        datos.setValor_pagado(total);
+        datos.setCod_ventaFK(codigo);
+        datos.setCod_personaFK((Integer.parseInt(txtCliente.getText())));
+        funcion.insertar(datos);
+        facturaCre();
+        
+
+        txtNumfactura.setText("");
+        txtAbono_add.setText("");
+        txtNombre_cliente.setText("");
+        txtSaldo.setText("0");
+        txtTotal_venta.setText("");
+        txtNumCedula.setText("");
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -821,7 +899,12 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+        if(cmbtipo.getSelectedItem().equals("Credito")){
+            guardar_credito();
+        }else if(cmbtipo.getSelectedItem().equals("Abono")){
         guardar_Abono();
+        }
         
       
     }//GEN-LAST:event_btnGuardarActionPerformed
