@@ -53,6 +53,7 @@ public final class FrmVentaDetalle extends javax.swing.JInternalFrame {
 
     public FrmVentaDetalle() {
         initComponents();
+      
         //btnGuardar.setMnemonic(KeyEvent.VK_X);
         txtComprueba.setText("0");
         btnNuevo.setEnabled(false);
@@ -471,7 +472,7 @@ txtDescuento.setText("0");
         jPanel3 = new javax.swing.JPanel();
         dcFecha_venta = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        cboComprobante = new javax.swing.JComboBox<String>();
+        cboComprobante = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtNombre_cliente = new javax.swing.JTextField();
@@ -498,14 +499,14 @@ txtDescuento.setText("0");
         btnAgregarProducto = new javax.swing.JButton();
         btnbuscarProducto = new javax.swing.JButton();
         btnQuitarProducto = new javax.swing.JButton();
-        cboModoIngreso = new javax.swing.JComboBox<String>();
+        cboModoIngreso = new javax.swing.JComboBox<>();
         lblModo = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txtImporte = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtCambio = new javax.swing.JTextField();
-        cboMetodoPago = new javax.swing.JComboBox<String>();
+        cboMetodoPago = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         btnCalcular = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -553,7 +554,7 @@ txtDescuento.setText("0");
         cboComprobante.setBackground(new java.awt.Color(36, 33, 33));
         cboComprobante.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         cboComprobante.setForeground(new java.awt.Color(207, 207, 207));
-        cboComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Factura", "Boleta" }));
+        cboComprobante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Boleta" }));
         cboComprobante.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboComprobanteItemStateChanged(evt);
@@ -846,7 +847,7 @@ txtDescuento.setText("0");
         cboModoIngreso.setBackground(new java.awt.Color(36, 33, 33));
         cboModoIngreso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         cboModoIngreso.setForeground(new java.awt.Color(207, 207, 207));
-        cboModoIngreso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "x Unidad", "x Mayor" }));
+        cboModoIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "x Unidad", "x Mayor" }));
         cboModoIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboModoIngresoActionPerformed(evt);
@@ -967,7 +968,7 @@ txtDescuento.setText("0");
         cboMetodoPago.setBackground(new java.awt.Color(36, 33, 33));
         cboMetodoPago.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         cboMetodoPago.setForeground(new java.awt.Color(207, 207, 207));
-        cboMetodoPago.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Efectivo", "Credito", "Tarjeta" }));
+        cboMetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Credito", "Tarjeta" }));
         cboMetodoPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboMetodoPagoActionPerformed(evt);
@@ -1118,12 +1119,12 @@ txtDescuento.setText("0");
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSubTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addComponent(txtSubTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(1, 1, 1)
-                .addComponent(txtTotal_venta, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(txtTotal_venta, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

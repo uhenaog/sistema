@@ -1,6 +1,8 @@
 package Controlador;
 
+import Datos.Dventa;
 import Funciones.Fcliente;
+import Funciones.Fventa;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -215,11 +217,14 @@ static int Comprueba;
                 Abonos.txtcedulaC.setText(cedula);
            
             } 
-            if(Comprueba == 2){
+            if(Comprueba == 2){             
+                              
                  
                   Abonos.txtCod_cliente.setText(cod);
                 Abonos.txtNombre_cliente.setText(nombre);
                 Abonos.txtcedulaC.setText(cedula);
+                
+                //JOptionPane.showMessageDialog(this, cod);
             } 
                   
             

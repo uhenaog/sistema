@@ -103,6 +103,12 @@ public final class Abonos extends javax.swing.JInternalFrame {
                 return l;
             }
         });
+         btnCalcular.addKeyListener(new java.awt.event.KeyAdapter() {
+
+            public void keyPressed(java.awt.event.KeyEvent e) {
+                btnCalcularActionPerformed(null);
+            }
+        });
     }
 
     public void ocultar_columnas() {
@@ -392,7 +398,7 @@ public final class Abonos extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         dcFecha_venta = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        cboComprobante = new javax.swing.JComboBox<String>();
+        cboComprobante = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtNombre_cliente = new javax.swing.JTextField();
@@ -421,7 +427,7 @@ public final class Abonos extends javax.swing.JInternalFrame {
         btnAgregarProducto = new javax.swing.JButton();
         btnbuscarProducto = new javax.swing.JButton();
         btnQuitarProducto = new javax.swing.JButton();
-        cboModoIngreso = new javax.swing.JComboBox<String>();
+        cboModoIngreso = new javax.swing.JComboBox<>();
         lblModo = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -469,7 +475,7 @@ public final class Abonos extends javax.swing.JInternalFrame {
         cboComprobante.setBackground(new java.awt.Color(36, 33, 33));
         cboComprobante.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         cboComprobante.setForeground(new java.awt.Color(207, 207, 207));
-        cboComprobante.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Boleta" }));
+        cboComprobante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boleta" }));
         cboComprobante.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cboComprobanteItemStateChanged(evt);
@@ -784,7 +790,7 @@ public final class Abonos extends javax.swing.JInternalFrame {
         cboModoIngreso.setBackground(new java.awt.Color(36, 33, 33));
         cboModoIngreso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         cboModoIngreso.setForeground(new java.awt.Color(207, 207, 207));
-        cboModoIngreso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "x Unidad", "x Mayor" }));
+        cboModoIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "x Unidad", "x Mayor" }));
         cboModoIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboModoIngresoActionPerformed(evt);
@@ -1153,13 +1159,22 @@ public final class Abonos extends javax.swing.JInternalFrame {
                     txtImporte.requestFocus();
                     return;
                 }
+                Dventa datos = new Dventa();
+                Fventa funcion = new Fventa();
+                
+                int codigo=funcion.BuscarCod_cleinte();
+                
+                if (codigo>0){
+                    JOptionPane.showMessageDialog(null,"este cliente tiene saldos pendientes ");
+                    return;
+                 }
+                
 
                 this.setClosable(false);
                 btnNuevo.setEnabled(true);
                 txtImporte.setEditable(true);
                 txtSaldo.setEditable(false);
-                Dventa datos = new Dventa();
-                Fventa funcion = new Fventa();
+                
                 Calendar cal;
                 int d, m, a;
                 cal = dcFecha_venta.getCalendar();
@@ -1633,7 +1648,8 @@ public final class Abonos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombre_productoActionPerformed
 
     private void txtImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImporteActionPerformed
-        // TODO add your handling code here:
+
+txtImporte.transferFocus();         // TODO add your handling code here:
     }//GEN-LAST:event_txtImporteActionPerformed
 
     private void txtTotal_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotal_ventaActionPerformed

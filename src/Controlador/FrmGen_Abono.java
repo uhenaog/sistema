@@ -64,7 +64,8 @@ public final class FrmGen_Abono extends javax.swing.JInternalFrame {
         txtStock.setVisible(false);
         txtcodProducto.setVisible(false);
         txtcodVenta.setVisible(false);
-       
+        cmbtipo.setVisible(false);
+       jLabel11.setVisible(false);
 
         dcFecha_apertura.setEnabled(false);
         txtSaldo.setEnabled(false);

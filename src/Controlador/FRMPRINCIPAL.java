@@ -25,7 +25,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class FRMPRINCIPAL extends javax.swing.JFrame {
-
+int veri_aper=0;
     private conexion mysql = new conexion();
     private Connection cn = mysql.conectar();
 
@@ -122,6 +122,8 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         lblCod_persona = new javax.swing.JLabel();
         lblNombre_persona = new javax.swing.JLabel();
         lblAcceso = new javax.swing.JLabel();
+        aper = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jmIVenta = new javax.swing.JMenu();
         jmIVentas = new javax.swing.JMenuItem();
@@ -186,6 +188,13 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         lblAcceso.setText("ACCESO");
         deskPricipal.add(lblAcceso);
         lblAcceso.setBounds(30, 80, 170, 10);
+
+        aper.setForeground(new java.awt.Color(255, 255, 255));
+        aper.setText("jLabel2");
+        deskPricipal.add(aper);
+        aper.setBounds(400, 70, 34, 14);
+
+        jLabel1.setText("jLabel1");
 
         menuBar.setBackground(new java.awt.Color(36, 33, 33));
         menuBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -970,14 +979,16 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_JmIDatosEmpresaActionPerformed
 
     private void JmIAbrirCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JmIAbrirCajaActionPerformed
- FcajaApertura funcion2 = new FcajaApertura();
+ FcajaApertura funcion2 = new FcajaApertura(); 
         if (funcion2.VerificarFecha() >0) {
             
+                    
             
             JOptionPane.showMessageDialog(null, "la caja ya se abrio el Dia de hoy el \n "
                     + "Administrador solo permite un vendendor por Dia ");
             
         }else{
+        
         FrmApertura form = new FrmApertura();
         
 
@@ -1200,8 +1211,10 @@ rptinfcierre form = new rptinfcierre();
     public static javax.swing.JMenu MenuInformes;
     public static javax.swing.JMenu MenuPersonal;
     public static javax.swing.JMenu MenuProductos;
+    javax.swing.JLabel aper;
     javax.swing.JMenuItem cierresPorFechas;
     public static javax.swing.JDesktopPane deskPricipal;
+    javax.swing.JLabel jLabel1;
     javax.swing.JMenu jMIAyuda;
     javax.swing.JMenu jMenu1;
     javax.swing.JMenu jMenu2;

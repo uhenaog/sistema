@@ -30,10 +30,14 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
 
     private conexion mysql = new conexion();
     private Connection cn = mysql.conectar();
+    int variable= 0;
 
     public FrmMostrarVentas() {
         initComponents();
         mostrar();
+        
+        
+        
 
         txtTotal_venta.setEditable(false);
         //     BasicInternalFrameUI bi = (BasicInternalFrameUI) this.getUI();
@@ -83,7 +87,23 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
         }
         ocultar_columnas();
     }
+ public void mostrarAbono() {
+        txtCod_cliente.setVisible(false);
+        txtCod_usuario.setVisible(false);
+        try {
+            DefaultTableModel modelo;
+            Fventa funcion = new Fventa();
+            modelo = funcion.mostrarabono();
 
+            jTabla.setModel(modelo);
+
+            lblTotalRegistros.setText("Total Registros " + Integer.toString(funcion.totalRegistros));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        ocultar_columnas();
+    }
     public void Buscar(String buscar) {
         try {
             DefaultTableModel modelo;
@@ -162,6 +182,8 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
         txtCod_usuario = new javax.swing.JTextField();
         txtCod_cliente = new javax.swing.JTextField();
         txtActivaCliente = new javax.swing.JTextField();
+        btnVEntas = new javax.swing.JButton();
+        btnabonos = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -473,7 +495,7 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -493,36 +515,61 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
 
         txtActivaCliente.setText("1");
 
+        btnVEntas.setText("Mostrar Ventas");
+        btnVEntas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVEntasActionPerformed(evt);
+            }
+        });
+
+        btnabonos.setText("Mostrar Abonos");
+        btnabonos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnabonosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtNombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtActivaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCod_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCod_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnVEntas)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnabonos)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtActivaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCod_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCod_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVEntas)
+                    .addComponent(btnabonos))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCod_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCod_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtActivaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(txtNombre_usuario)
                         .addComponent(jLabel1)))
@@ -566,8 +613,8 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTablaMouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-        if (!txtCod_venta.getText().equals("")) {
+if (variable==1){
+    if (!txtCod_venta.getText().equals("")) {
             Fventa funcion = new Fventa();
             Dventa datos = new Dventa();
 
@@ -580,6 +627,22 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione una venta");
         }
         limpiar();
+}else if(variable==2){
+    if (!txtCod_venta.getText().equals("")) {
+            Fventa funcion = new Fventa();
+            Dventa datos = new Dventa();
+
+            datos.setCod_venta(Integer.parseInt(txtCod_venta.getText()));
+
+            funcion.eliminarAbono(datos);
+
+            mostrarAbono();
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una venta");
+        }
+        limpiar();
+}
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -665,7 +728,7 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
             try {
                 int codigo = Integer.parseInt(txtCod_venta.getText());
 
-                JasperReport jr = (JasperReport) JRLoader.loadObject(VistaBoleta.class.getResource("/Reportes/RptBoleta.jasper"));
+                JasperReport jr = (JasperReport) JRLoader.loadObject(VistaBoleta.class.getResource("/Reportes/RptBoleta_Abonos.jasper"));
 
                 Map parametro = new HashMap<String, Integer>();
                                                 parametro.put("logo",this.getClass().getResourceAsStream("/ImagenesReport/logo1.png"));
@@ -694,6 +757,19 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtTotal_ventaKeyTyped
+
+    private void btnVEntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVEntasActionPerformed
+      mostrar();
+      variable=1;
+      
+      // TODO add your handling code here:
+    }//GEN-LAST:event_btnVEntasActionPerformed
+
+    private void btnabonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabonosActionPerformed
+mostrarAbono();
+variable=2;
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnabonosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -736,6 +812,8 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
     public static javax.swing.JButton btnEditar;
     public static javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnPrint;
+    private javax.swing.JButton btnVEntas;
+    private javax.swing.JButton btnabonos;
     private com.toedter.calendar.JDateChooser dcFecha_venta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

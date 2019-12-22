@@ -1,5 +1,6 @@
 package Funciones;
 
+import Controlador.Abonos;
 import Controlador.FrmMostrarVentas;
 import Controlador.FrmVentaDetalle;
 import Datos.Dproducto;
@@ -36,6 +37,62 @@ public class Fventa {
                 + "as usuarioNom,cod_clienteFK ,"
                 + "(select nombre_persona from persona where cod_persona = cod_clienteFK)"
                 + "as clienteNom ,tipo_comprobante,num_factura,descuento,metodo_pago from venta order by cod_venta DESC";
+
+        
+        try {
+
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            
+            
+            
+
+            while (rs.next()) {
+
+                registros[0] = rs.getString("cod_venta");
+                registros[1] = rs.getString("fecha_venta");
+                registros[2] = rs.getString("total_venta");
+                registros[3] = rs.getString("cod_usuarioFK");
+                registros[4] = rs.getString("usuarioNom");
+                registros[5] = rs.getString("cod_clienteFK");
+                registros[6] = rs.getString("clienteNom");
+                registros[7] = rs.getString("tipo_comprobante");
+                registros[8] = rs.getString("num_factura");
+                registros[9] = rs.getString("descuento");
+                registros[10] = rs.getString("metodo_pago");
+                
+                totalRegistros = totalRegistros + 1;
+                modelo.addRow(registros);
+                
+                
+            }
+            return modelo;
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
+        
+
+    }
+    
+    public DefaultTableModel mostrarabono() {
+
+        DefaultTableModel modelo;
+
+        String[] titulos = {"Numero",
+            "Fecha ", "Total", "COD USU",
+            "Usuario", "COD CLIE", "Cliente", "Comprobante", "Numero", "Dscto","Metodo Pago"};
+
+        String[] registros = new String[11];
+        totalRegistros = 0;
+        modelo = new DefaultTableModel(null, titulos);
+
+        sSQL = "select cod_venta , fecha_venta ,total_venta , cod_usuarioFK,"
+                + "(select nombre_persona from persona where cod_persona = cod_usuarioFK)"
+                + "as usuarioNom,cod_clienteFK ,"
+                + "(select nombre_persona from persona where cod_persona = cod_clienteFK)"
+                + "as clienteNom ,tipo_comprobante,num_factura,descuento,metodo_pago from abono order by cod_venta DESC";
 
         
         try {
@@ -307,7 +364,28 @@ public class Fventa {
             return false;
         }
 
-    }//cierre funcion
+    }
+public boolean eliminarAbono(Dventa datos){
+    sSQL = "delete from abono where cod_venta = ?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+
+            pst.setInt(1, datos.getCod_venta());
+            int N = pst.executeUpdate();
+
+            if (N != 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return false;
+        }
+}
+//cierre funcion
 
     
     
@@ -614,9 +692,29 @@ public class Fventa {
             return false;
         } 
     }
+//verificar si existe un abono con el cliente 
+ public int BuscarCod_cleinte(){
+     int codigo=Integer.parseInt(Abonos.txtCod_cliente.getText().toString());
+sSQL = "select cod_clienteFK from abono where cod_clienteFK='"+codigo+"' and total_venta!=pago";
 
+        try {
+            int codigo_clienteFK = 0;
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while (rs.next()) {
+                codigo_clienteFK = rs.getInt("cod_clienteFK");
+            }
+
+            return codigo_clienteFK;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return 0;
+        }
+}
 }
 
+//fin de la verificacion 
 /*
 
  public boolean eliminar(Dventa datos) {
