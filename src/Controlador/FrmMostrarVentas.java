@@ -1,5 +1,13 @@
 package Controlador;
 
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import static Controlador.FRMPRINCIPAL.deskPricipal;
 import static Controlador.FrmVistacliente.Comprueba;
 import Datos.Dventa;
@@ -13,6 +21,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
+import javax.mail.Session;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -30,6 +40,8 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
 
     private conexion mysql = new conexion();
     private Connection cn = mysql.conectar();
+    public static String Username = "backupangel2020@gmail.com";
+    public static String PassWord = "qwertyui12*";
     int variable= 0;
 
     public FrmMostrarVentas() {
@@ -140,6 +152,44 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
         txtComprobante.setText("");
         txtBuscar.setText("");
 
+    }
+     public void SendMail() {
+      //String Username= "bakupangel2020@gmail.com";
+        String Mensage = "se elimino la venta numero "+txtCod_venta.getText()+" por un valor de "+txtTotal_venta.getText();
+    String To = "uhenaog@gmail.com";
+    String Subject = "eliminacion de venta " ;
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+                
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(Username, PassWord);
+                
+            }
+        });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(Username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(To));
+            message.setSubject(Subject);
+            message.setText(Mensage);
+
+            Transport.send(message);
+            //JOptionPane.showMessageDialog(this, "Su mensaje ha sido enviado");
+
+        } catch (MessagingException e) {
+            JOptionPane.showMessageDialog(null, "mensaje no enviado"+e);
+            throw new RuntimeException(e);
+            
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -472,7 +522,7 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -495,7 +545,7 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -615,6 +665,7 @@ public class FrmMostrarVentas extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 if (variable==1){
     if (!txtCod_venta.getText().equals("")) {
+        SendMail();
             Fventa funcion = new Fventa();
             Dventa datos = new Dventa();
 
@@ -623,12 +674,14 @@ if (variable==1){
             funcion.RestaurarProd(datos);
 
             mostrar();
+            
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una venta");
         }
         limpiar();
 }else if(variable==2){
     if (!txtCod_venta.getText().equals("")) {
+        SendMail();
             Fventa funcion = new Fventa();
             Dventa datos = new Dventa();
 
@@ -637,6 +690,7 @@ if (variable==1){
             funcion.eliminarAbono(datos);
 
             mostrarAbono();
+           
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una venta");
         }
